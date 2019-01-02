@@ -10,15 +10,16 @@ public class ConnectionUI extends JFrame {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JLabel title;
     private JTextField hostInput;
     private JTextField userInput;
     private JTextField schemaInput;
+    private JTextField tableInput;
+    private JTextField passwordInput;
 
     public ConnectionUI() {
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonOK);
-        setSize(400, 200);
+        setSize(400, 220);
         setLocationRelativeTo(null);
 
         try {
@@ -64,7 +65,9 @@ public class ConnectionUI extends JFrame {
         String host = hostInput.getText();
         String user = userInput.getText();
         String schema = schemaInput.getText();
+        String table = tableInput.getText();
+        String password = passwordInput.getText();
 
-        DAO dao = new DAO(host, user, schema);
+        DAO dao = new DAO(host, user, password, schema, table);
     }
 }

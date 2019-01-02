@@ -13,21 +13,24 @@ import java.util.List;
 
 public class DAO {
 
-    private String prefix = "jdbc:mysql://";
-    private String sufix = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private Connection conn;
     private List<String> HEADERS;
     private List<List<String>> data;
-    private String schema;
+    private String table;
 
-    public DAO(String host, String user, String schema) {
+    public DAO(String host, String user, String password, String schema, String table) {
+        this.table = table;
         data = new ArrayList<>();
         HEADERS = new ArrayList<>();
-        this.schema = schema;
         try {
-            conn = DriverManager.getConnection(prefix+host+"/"+schema+sufix,user,"");
+            String prefix = "jdbc:mysql://";
+            String suffix = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+            conn = DriverManager.getConnection(prefix +host+"/"+schema+ suffix,user,password);
+
             System.out.println("Successfully connected !");
-            InformationUI iui = new InformationUI("Connection", "Successfully connected !", "info");
+
+            new InformationUI("Connection", "Successfully connected !", "info");
+
         } catch (SQLException e) {
             System.out.println("Error in connection :");
             StringWriter sw = new StringWriter();
@@ -36,7 +39,7 @@ public class DAO {
             e.printStackTrace(pw);
             String sStackTrace = sw.toString(); // stack trace as a string
 
-            InformationUI iui = new InformationUI("Error", sStackTrace, "error");
+            new InformationUI("Error", sStackTrace, "error");
         }
         getHeaders();
         fetchData();
@@ -51,7 +54,7 @@ public class DAO {
         Statement st;
         try {
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SHOW columns FROM people");
+            ResultSet rs = st.executeQuery("SHOW columns FROM " + table);
             while (rs.next()) {
                 HEADERS.add(rs.getString(1));
                 // System.out.println(rs.getString(1));
@@ -65,7 +68,7 @@ public class DAO {
     private void fetchData() {
         try {
             Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM people");
+            ResultSet rs = st.executeQuery("SELECT * FROM " + table);
 
             while (rs.next()) {
                 List<String> tmp = new ArrayList<>();

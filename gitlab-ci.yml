@@ -1,0 +1,12 @@
+image: maven:latest
+
+cache:
+  paths:
+    - .m2/repository/
+    - target/
+deploy:
+  stage: deploy
+  script:
+    - mvn clean compile assembly:single
+  only:
+    - master
