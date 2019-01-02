@@ -10,6 +10,6 @@ deploy:
     - mvn clean compile assembly:single
   artifacts:
     paths:
-      - MySQLReader-1.0-SNAPSHOT-jar-with-dependencies.jar
+      - target/MySQLReader-1.0-SNAPSHOT-jar-with-dependencies.jar
   only:
     - master
