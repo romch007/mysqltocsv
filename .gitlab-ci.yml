@@ -8,5 +8,8 @@ deploy:
   stage: deploy
   script:
     - mvn clean compile assembly:single
+  artifacts:
+    paths:
+      - MySQLReader-1.0-SNAPSHOT-jar-with-dependencies.jar
   only:
     - master
