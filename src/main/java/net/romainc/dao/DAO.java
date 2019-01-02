@@ -24,8 +24,8 @@ public class DAO {
         HEADERS = new ArrayList<>();
         try {
             String prefix = "jdbc:mysql://";
-            String suffix = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-            conn = DriverManager.getConnection(prefix +host+"/"+schema+ suffix,user,password);
+            String suffix = "characterEncoding=latin1&characterSetResults=latin1&serverTimezone=UTC&useSSL=false";
+            conn = DriverManager.getConnection(prefix +host+"/"+schema+"?"+suffix,user,password);
 
             System.out.println("Successfully connected !");
 
