@@ -1,5 +1,7 @@
 package net.romainc.ui;
 
+import net.romainc.Variables;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,6 +13,12 @@ public class InformationUI extends JDialog {
     private JLabel title;
     private JLabel text;
 
+    /**
+     * Create a information or error popup
+     * @param title The title of the popup
+     * @param text The text of the popup
+     * @param type The type (static in Variables class)
+     */
     public InformationUI(String title, String text, String type) {
         setContentPane(contentPane);
         setModal(true);
@@ -20,10 +28,10 @@ public class InformationUI extends JDialog {
         setTitle(title);
         this.text.setText(text);
         switch (type) {
-            case "error":
+            case Variables.UIError:
                 setResizable(true);
                 break;
-            case "info":
+            case Variables.UIInfo:
                 setResizable(false);
                 break;
         }

@@ -4,7 +4,6 @@ import net.romainc.dao.DAO;
 
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.HashMap;
 
 public class ConnectionUI extends JFrame {
     private JPanel contentPane;
@@ -15,11 +14,12 @@ public class ConnectionUI extends JFrame {
     private JTextField schemaInput;
     private JTextField tableInput;
     private JTextField passwordInput;
+    private JComboBox modeCombo;
 
     public ConnectionUI() {
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonOK);
-        setSize(400, 220);
+        setSize(400, 250);
         setLocationRelativeTo(null);
 
         try {
@@ -46,6 +46,15 @@ public class ConnectionUI extends JFrame {
         contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         setResizable(false);
         setVisible(true);
+        modeCombo.addActionListener(e -> {
+            if (modeCombo.getSelectedIndex() == 0) {
+                tableInput.setEnabled(false);
+                tableInput.setEditable(false);
+            } else {
+                tableInput.setEnabled(true);
+                tableInput.setEditable(true);
+            }
+        });
     }
 
     private void onOK() {
@@ -67,7 +76,8 @@ public class ConnectionUI extends JFrame {
         String schema = schemaInput.getText();
         String table = tableInput.getText();
         String password = passwordInput.getText();
+        int mode = modeCombo.getSelectedIndex();
 
-        DAO dao = new DAO(host, user, password, schema, table);
+        DAO dao = new DAO(host, user, password, schema, table, mode == 1);
     }
 }
