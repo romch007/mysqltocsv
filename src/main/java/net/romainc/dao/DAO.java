@@ -39,7 +39,7 @@ public class DAO {
 
             System.out.println("Successfully connected !");
 
-            new InformationUI("Connection", "Successfully connected !", Variables.UIError);
+            new InformationUI("Connection", "Successfully connected !", Variables.UIInfo);
 
         } catch (SQLException e) {
             System.out.println("Error in connection :");
