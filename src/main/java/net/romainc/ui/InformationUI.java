@@ -19,7 +19,7 @@ public class InformationUI extends JDialog {
      * @param text The text of the popup
      * @param type The type (static in Variables class)
      */
-    public InformationUI(String title, String text, String type) {
+    public InformationUI(String title, String text, Variables type) {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -27,14 +27,7 @@ public class InformationUI extends JDialog {
         buttonOK.addActionListener(e -> onOK());
         setTitle(title);
         this.text.setText(text);
-        switch (type) {
-            case Variables.UIError:
-                setResizable(true);
-                break;
-            case Variables.UIInfo:
-                setResizable(false);
-                break;
-        }
+        setResizable(type == Variables.ERROR);
         setSize(100, 120);
         setLocationRelativeTo(null);
         setVisible(true);

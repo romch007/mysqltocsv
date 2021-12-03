@@ -39,7 +39,7 @@ public class DAO {
 
             System.out.println("Successfully connected !");
 
-            new InformationUI("Connection", "Successfully connected !", Variables.UIInfo);
+            new InformationUI("Connection", "Successfully connected !", Variables.INFO);
 
         } catch (SQLException e) {
             System.out.println("Error in connection :");
@@ -49,7 +49,7 @@ public class DAO {
             e.printStackTrace(pw);
             String sStackTrace = sw.toString(); // stack trace as a string
 
-            new InformationUI("Error", sStackTrace, Variables.UIError);
+            new InformationUI("Error", sStackTrace, Variables.ERROR);
         }
         if (allData) {
             getHeaders();
@@ -63,7 +63,7 @@ public class DAO {
             List<String> tables = getTables();
             StringBuilder sb = new StringBuilder();
             tables.forEach(e -> sb.append(e).append("; "));
-            new InformationUI("Tables", "Available tables : " + sb.toString(), Variables.UIInfo);
+            new InformationUI("Tables", "Available tables : " + sb.toString(), Variables.INFO);
         }
     }
 
